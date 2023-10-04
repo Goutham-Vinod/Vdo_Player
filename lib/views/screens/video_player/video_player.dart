@@ -7,9 +7,10 @@ import 'package:vdo_player/views/screens/video_player/custom_video_controller/cu
 import 'package:vdo_player/views/screens/video_player/custom_video_controller/video_controller_functions.dart';
 
 class VideoPreview extends StatefulWidget {
-  const VideoPreview(this.videoPath, {super.key});
+  const VideoPreview({required this.videoPaths, this.startIndex, super.key});
 
-  final String videoPath;
+  final List<String> videoPaths;
+  final int? startIndex;
 
   @override
   State<VideoPreview> createState() => _VideoPreviewState();
@@ -21,7 +22,10 @@ class _VideoPreviewState extends State<VideoPreview> {
   @override
   void initState() {
     // Initializing video player
-    VideoControllerFunctions.setVideoPath(widget.videoPath);
+    VideoControllerFunctions.setVideoPaths(
+      videoPaths: widget.videoPaths,
+      startIndex: widget.startIndex,
+    );
 
     super.initState();
   }
@@ -31,6 +35,9 @@ class _VideoPreviewState extends State<VideoPreview> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+
+    VideoControllerFunctions.disposeController();
+
     // flickManager.dispose();
     super.dispose();
   }

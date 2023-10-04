@@ -39,13 +39,13 @@ class CustomPortraitVideoController extends StatelessWidget {
                         CustomBackButton(
                             leftPos: width * 0.015, topPos: height * 0.05),
                         CustomSeekBar(
-                          width: width,
+                          sliderWidth: width * 0.85,
                           seekBarTopPos: height * 0.825,
-                          seekBarLeftPos: width * 0.04,
-                          currentDurstionTopPos: height * 0.845,
-                          currentDurationLeftPos: width * 0.002,
+                          seekBarLeftPos: width * 0.075,
+                          currentDurationTopPos: height * 0.845,
+                          currentDurationLeftPos: width * 0.018,
                           totalDurationTopPos: height * 0.845,
-                          totalDurationLeftPos: width * 0.905,
+                          totalDurationLeftPos: width * 0.89,
                         ),
                         CustomPlayButton(
                           size: width * 0.115,

@@ -4,13 +4,13 @@ import 'common_functions.dart';
 class CommonVariablesNotifier with ChangeNotifier {
 // common variables
 
-  List _videosGlobal = [];
-  set videosGlobal(val) {
+  List<String> _videosGlobal = [];
+  set videosGlobal(List<String> val) {
     _videosGlobal = val;
     notifyListeners();
   }
 
-  get videosGlobal => _videosGlobal;
+  List<String> get videosGlobal => _videosGlobal;
 
   int _selectedNaviBarIndex = 0;
   set selectedNaviBarIndex(val) {

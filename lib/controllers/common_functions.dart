@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter_video_info/flutter_video_info.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 searchFromStringList(String query, stringList) {
-  List suggestions = stringList.where((stringElement) {
+  List<String> suggestions = stringList.where((stringElement) {
     String findString = query.toLowerCase().trim();
     final mainString = stringElement.toString().toLowerCase();
     return mainString.contains(findString);
@@ -18,8 +20,8 @@ String truncateWithEllipsis(int cutoff, String myString) {
       : '${myString.substring(0, cutoff)}...';
 }
 
-findUniqueFiles(videos) {
-  List uniqueFiles = videos.toSet().toList();
+findUniqueFiles(List<String> videos) {
+  List<String> uniqueFiles = videos.toSet().toList();
   return uniqueFiles;
 }
 
@@ -28,15 +30,15 @@ findFileName(filePath) {
   return fileName;
 }
 
-findUniqueFolders(List videos) {
-  List uniqueFolders = [];
-  List folders = findFolders(videos);
+findUniqueFolders(List<String> videos) {
+  List<String> uniqueFolders = [];
+  List<String> folders = findFolders(videos);
   uniqueFolders = folders.toSet().toList();
   return uniqueFolders;
 }
 
-findFolders(List videos) {
-  List folders = [];
+findFolders(List<String> videos) {
+  List<String> folders = [];
   for (int i = 0; i < videos.length; i++) {
     folders.add(findFolderPath(videos[i]));
   }
@@ -45,7 +47,7 @@ findFolders(List videos) {
 
 findFolderPath(video) {
   String folderPath = "";
-  List folders = video.split('/');
+  List<String> folders = video.split('/');
   String folderName = video.split('/')[folders.length - 2];
 
   for (int i = 0; i < folders.length; i++) {
@@ -72,7 +74,9 @@ Future getVideoInfo(videoPath) async {
   try {
     var info = await videoInfo.getVideoInfo(videoPath);
     milliseconds = info?.duration ?? 0;
-  } catch (e) {}
+  } catch (e) {
+    log(e.toString());
+  }
   return milliseconds;
 }
 
@@ -86,9 +90,7 @@ Future<String> generateThumb(path) async {
             thumbnailPath: (await getTemporaryDirectory()).path,
             imageFormat: ImageFormat.PNG))
         .toString();
-  } catch (e) {
-    
-  }
+  } catch (e) {}
 
   return thumbFile;
 }

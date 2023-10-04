@@ -5,13 +5,13 @@ import 'package:permission_handler/permission_handler.dart';
 import 'dart:async';
 
 class FetchAllVideos {
-  List videosDirectories = [];
-  List allDirectories = [];
-  List myDirectories = [];
+  List<String> videosDirectories = [];
+  List<String> allDirectories = [];
+  List<String> myDirectories = [];
   int myIndex = 0;
   int? androidVersion;
 
-  Future<List> getAllVideos() async {
+  Future<List<String>> getAllVideos() async {
     PermissionStatus status;
     var androidInfo = DeviceInfoPlugin();
     try {

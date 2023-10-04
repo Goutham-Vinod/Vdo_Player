@@ -6,7 +6,6 @@ import 'package:vdo_player/controllers/db_functions.dart';
 
 import '../screens/video_player/video_player.dart';
 
-
 class PlaylistVideos extends StatelessWidget {
   const PlaylistVideos({super.key});
 
@@ -40,15 +39,17 @@ class PlaylistVideos extends StatelessWidget {
         body: Consumer<DbNotifier>(builder: (context, Db, child) {
           if (Db.playlistFolders[selectedPlaylistFolderIndex].playlist !=
               null) {
-              
             return GridListViewVideosWidget(
               dataList:
                   Db.playlistFolders[selectedPlaylistFolderIndex].playlist!,
               onTapFunction: (index) {
                 Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-                  return VideoPreview(Db
-                      .playlistFolders[selectedPlaylistFolderIndex]
-                      .playlist![index]);
+                  return VideoPreview(
+                    videoPaths: [
+                      Db.playlistFolders[selectedPlaylistFolderIndex].playlist!
+                    ],
+                    startIndex: index,
+                  );
                 }));
               },
               enableThreeDot: true,

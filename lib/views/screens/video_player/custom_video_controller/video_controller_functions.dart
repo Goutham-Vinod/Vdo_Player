@@ -13,24 +13,21 @@ class VideoControllerFunctions {
   //
   static late VideoPlayerController videoPlayerController;
   static late FlickManager flickManager;
-
-  static ValueNotifier<int> sliderValueNotifier = ValueNotifier<int>(0);
-
-  static ValueNotifier<bool> videoPlayerControlsVisibilityNotifier =
-      ValueNotifier<bool>(true);
-
-  static ValueNotifier<bool> isVideoPlayingNotifier = ValueNotifier<bool>(true);
   static bool isFullScreenMode = false;
-
   static DateTime?
       _lastUserInterationTime; // currentTime -  _lastUserInteractionTime = idleTime duration
+  static Duration? currentPosition; // current Video position
+  static List<String> videoPaths = [];
+  static int currentVideoIndex = 0;
 
   static ValueNotifier<List<DeviceOrientation>>
       currentScreenOrientationsNotifier =
       ValueNotifier([DeviceOrientation.portraitUp]);
-
-  static Duration? currentPosition; // current Video position
-
+  static ValueNotifier<int> seekBarValueNotifier = ValueNotifier<int>(0);
+  // seekBarValue = completed video duration in seconds
+  static ValueNotifier<bool> videoPlayerControlsVisibilityNotifier =
+      ValueNotifier<bool>(true);
+  static ValueNotifier<bool> isVideoPlayingNotifier = ValueNotifier<bool>(true);
   static ValueNotifier<bool> lockButtonVisibilityNotifier =
       ValueNotifier<bool>(true);
 
@@ -40,25 +37,43 @@ class VideoControllerFunctions {
 
   //
 
-  static setVideoPath(String videoPath) {
+  static setVideoPaths({required List<String> videoPaths, int? startIndex}) {
     // Video player initialization
     isVideoPlayingNotifier.value = true;
-    videoPlayerController = VideoPlayerController.file(File(videoPath));
+    seekBarValueNotifier.value = 0;
+
+    if (startIndex != null) {
+      currentVideoIndex = startIndex;
+    }
+
+    // setting video path to video Controllers
+    videoPlayerController =
+        VideoPlayerController.file(File(videoPaths[currentVideoIndex]));
     flickManager = FlickManager(
       videoPlayerController: videoPlayerController,
     );
+
+    // showing custom controllers
     showControls();
     markUserInteraction();
     flickManager.onVideoEnd = () {
-      isVideoPlayingNotifier.value = false;
+      // if its the last video then stop video player else play next video
+      if (currentVideoIndex == videoPaths.length - 1) {
+        isVideoPlayingNotifier.value = false;
+      } else {
+        playNextVideo();
+      }
 
       print('Video ended');
     };
 
+    // to start updating current watch duration
     updateCurrentPosition();
   }
 
   static markUserInteraction() {
+    // _last user interaction time was updated to keep a track of device idle time
+    // helps to hide controllers automatically after the waitSeconds.
     _lastUserInterationTime = DateTime.now();
   }
 
@@ -67,7 +82,7 @@ class VideoControllerFunctions {
       await Future.delayed(const Duration(milliseconds: 500));
       Duration? currentPosition =
           flickManager.flickVideoManager?.videoPlayerValue?.position;
-      sliderValueNotifier.value = currentPosition!.inSeconds;
+      seekBarValueNotifier.value = currentPosition!.inSeconds;
     }
   }
 
@@ -126,7 +141,7 @@ class VideoControllerFunctions {
   static seekVideo(Duration moment) {
     markUserInteraction();
 
-    sliderValueNotifier.value = moment.inSeconds;
+    seekBarValueNotifier.value = moment.inSeconds;
     flickManager.flickControlManager?.seekTo(moment);
   }
 
@@ -202,6 +217,7 @@ class VideoControllerFunctions {
   }
 
   static disposeController() {
-    videoPlayerController.dispose();
+    print('dispose called');
+    flickManager.dispose();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vdo_player/views/screens/video_player/custom_video_controller/video_controller_functions.dart';
 
 class CustomNextButton extends StatelessWidget {
   const CustomNextButton({
@@ -20,7 +21,9 @@ class CustomNextButton extends StatelessWidget {
         top: topPos,
         left: leftPos,
         child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              VideoControllerFunctions.playNextVideo();
+            },
             icon: Icon(
               size: size,
               Icons.skip_next,

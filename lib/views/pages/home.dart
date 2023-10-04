@@ -13,12 +13,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CommonVariablesNotifier>(
       builder: (context, commonVariable, child) {
-        List videos = findUniqueFiles(commonVariable.videosGlobal);
+        List<String> videos = findUniqueFiles(commonVariable.videosGlobal);
         return GridListViewVideosWidget(
           dataList: videos,
           onTapFunction: (index) {
             Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-              return VideoPreview(videos[index]);
+              return VideoPreview(videoPaths: videos,startIndex: index,);
             }));
           },
           enableThreeDot: true,

@@ -40,7 +40,7 @@ class FolderVideos extends StatelessWidget {
           children: [
             Expanded(child: Consumer<CommonVariablesNotifier>(
               builder: (context, commonVariables, child) {
-                List videos = findUniqueFiles(searchFromStringList(
+                List<String> videos = findUniqueFiles(searchFromStringList(
                     selectedFolderPath,
                     commonVariablesNotifieProvider.videosGlobal));
                 return GridListViewVideosWidget(
@@ -48,7 +48,10 @@ class FolderVideos extends StatelessWidget {
                   onTapFunction: (index) {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (ctx) {
-                      return VideoPreview(videos[index]);
+                      return VideoPreview(
+                        videoPaths: videos,
+                        startIndex: index,
+                      );
                     }));
                   },
                   enableThreeDot: true,

@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
   bool appBarSortIconVisibility = true;
   bool appBarGridIconVisibility = true;
   final _searchTextController = TextEditingController();
-  List videosGlobalBackup = [];
+  List<String> videosGlobalBackup = [];
 
   List pages = <Widget>[
     const Home(),

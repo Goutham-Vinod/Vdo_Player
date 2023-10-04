@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vdo_player/views/screens/video_player/custom_video_controller/video_controller_functions.dart';
 
 class CustomPreviousButton extends StatelessWidget {
   const CustomPreviousButton({
@@ -21,7 +22,9 @@ class CustomPreviousButton extends StatelessWidget {
         top: topPos,
         left: leftPos,
         child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              VideoControllerFunctions.playPreviousVideo();
+            },
             icon: Icon(
               size: size,
               Icons.skip_previous,

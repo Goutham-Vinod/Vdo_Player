@@ -41,10 +41,10 @@ class CustomLandscapeVideoController extends StatelessWidget {
                         CustomBackButton(
                             leftPos: width * 0.015, topPos: height * 0.05),
                         CustomSeekBar(
-                          width: width,
+                          sliderWidth: width * 0.92,
                           seekBarTopPos: height * 0.78,
                           seekBarLeftPos: width * 0.04,
-                          currentDurstionTopPos: height * 0.82,
+                          currentDurationTopPos: height * 0.82,
                           currentDurationLeftPos: width * 0.02,
                           totalDurationTopPos: height * 0.82,
                           totalDurationLeftPos: width * 0.95,
