@@ -2,9 +2,14 @@
 
 <p id="description">A simple video player were user can create custom playlist to watch videos which are stored phone’s internal storage and SD card.</p>
 
-<p align="center"><img src="https://img.shields.io/badge/-Provider-3d0079?style=flat&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/-MVC_Architecture-9c27b0?style=flat" alt="shields"><img src="https://img.shields.io/badge/-Hive-2500ff?style=flat" alt="shields"><img src="https://img.shields.io/badge/-Flutter_launcher_Icons-white?style=flat" alt="shields"><img src="https://img.shields.io/badge/-Flutter_Native_Splash-9c27b0?style=flat" alt="shields"></p>
+<p align="center">
+  <img src="https://img.shields.io/badge/-Provider-3d0079?style=flat&amp;logoColor=white" alt="shields"> &nbsp;
+  <img src="https://img.shields.io/badge/-MVC_Architecture-9c27b0?style=flat" alt="shields"> &nbsp;
+  <img src="https://img.shields.io/badge/-Hive-2500ff?style=flat" alt="shields"> &nbsp;
+  <img src="https://img.shields.io/badge/-Flutter_launcher_Icons-white?style=flat" alt="shields"> &nbsp;
+  <img src="https://img.shields.io/badge/-Flutter_Native_Splash-9c27b0?style=flat" alt="shields"></p>
 
-<h2>🚀 Demo</h2>
+
 
 <h2>Project Screenshots:</h2>
 
